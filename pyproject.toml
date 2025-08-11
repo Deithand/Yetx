@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "yetx"
+version = "0.1.0"
+description = "YetX torrent client"
+authors = ["YetX Developers"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.0"
+fastapi = "^0.110"
+uvicorn = {version = "^0.29", extras = ["standard"]}
+libtorrent = {version = "*", optional = true, markers = "python_version < '4.0'"}
+PySide6 = {version = "*", optional = true, markers = "python_version < '3.13'"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+httpx = "^0.27"
+black = "^23.0"
+ruff = "^0.1"
+mypy = "^1.7"
+pre-commit = "^3.5"
+
+[tool.poetry.extras]
+core = ["libtorrent"]
+gui = ["PySide6"]
+
+[tool.poetry.plugins."yetx.plugins"]
+sample = "yetx.plugins.sample_plugin:register"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
