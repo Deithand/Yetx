@@ -1,3 +1,4 @@
+from yetx.core.config import CoreSettings
 from yetx.core.session import TorrentSession
 
 
@@ -37,9 +38,10 @@ class FakeLibtorrent:
         self.fake_session = FakeSession()
 
 
-def test_add_and_pause() -> None:
+def test_add_and_pause(tmp_path) -> None:
     lt = FakeLibtorrent()
-    s = TorrentSession(lt_module=lt)
+    cfg = CoreSettings(download_dir=tmp_path)
+    s = TorrentSession(lt_module=lt, config=cfg)
     tid = s.add_magnet("magnet:?xt=urn:btih:abc123")
     assert tid == "abc123"
     assert s.list_torrents() == ["abc123"]
