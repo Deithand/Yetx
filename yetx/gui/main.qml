@@ -7,14 +7,29 @@ ApplicationWindow {
     height: 480
     title: qsTr("YetX")
 
-    Rectangle {
-        anchors.fill: parent
-        color: "#202020"
+    Column {
+        anchors.centerIn: parent
+        spacing: 8
 
-        Text {
-            anchors.centerIn: parent
-            color: "white"
-            text: qsTr("YetX")
+        TextField {
+            id: magnetInput
+            width: 400
+            placeholderText: qsTr("Magnet URI")
+        }
+
+        Button {
+            text: qsTr("Add Torrent")
+            onClicked: {
+                controller.add_magnet(magnetInput.text)
+                magnetInput.text = ""
+            }
+        }
+
+        ListView {
+            width: 400
+            height: 300
+            model: torrentModel
+            delegate: Text { text: modelData }
         }
     }
 }
