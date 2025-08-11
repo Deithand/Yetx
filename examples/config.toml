@@ -1,0 +1,7 @@
+# YetX configuration example
+[core]
+# Directory where downloads are stored
+#download_dir = "/path/to/downloads"
+
+# Listening port for incoming connections
+listen_port = 6881
